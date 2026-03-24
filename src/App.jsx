@@ -3,21 +3,24 @@ import { useState, useEffect } from "react"
 import { getAllJokes, saveJoke } from "./services/jokeService"
 
 
-
-
 export const App = () => {
   const [newJoke, setNewJoke] = useState("")
   const [allJokes, setAllJokes] = useState([])
   const [untoldJokes, setUntoldJokes] = useState([])
   const [toldJokes, setToldJokes] = useState([])
 
-  useEffect(() => {
+
+  const getJokes = () => {
     getAllJokes().then(jokesArray => {
       setAllJokes(jokesArray)
       setUntoldJokes(jokesArray.filter(joke => joke.told === false))
       setToldJokes(jokesArray.filter(joke => joke.told === true))
       console.log("jokes set!")
   })
+  }
+
+  useEffect(() => {
+    getJokes()
   }, []) // Only runs on initial render of component
 
   return (
@@ -43,6 +46,7 @@ export const App = () => {
           onClick={async () => {
             await saveJoke(newJoke)
             setNewJoke("")
+            getJokes()
           }}
         >
           Add Joke
