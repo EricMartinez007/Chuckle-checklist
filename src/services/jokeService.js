@@ -15,3 +15,7 @@ export const saveJoke = async (jokeText) => {
     await fetch("http://localhost:8088/jokes", postOptions)
   }
 }
+
+export const getAllJokes = () => {
+    return fetch(`http://localhost:8088/jokes`).then(res => res.json())
+}
