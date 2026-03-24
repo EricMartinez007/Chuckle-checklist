@@ -1,5 +1,6 @@
 import "./App.css"
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import { saveJoke } from "./services/jokeService"
 
 
 
@@ -16,10 +17,19 @@ export const App = () => {
           className="joke-input"
           type="text"
           placeholder="New One Liner"
+          value={newJoke}
           onChange={(event) => {
             setNewJoke(event.target.value)
           }}
         />
+        <button 
+          className="joke-input-submit"
+          onClick={() => {
+            saveJoke(newJoke)
+          }}
+        >
+          Add Joke
+        </button>
       </div>
       
       
