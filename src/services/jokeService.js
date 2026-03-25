@@ -16,6 +16,20 @@ export const saveJoke = async (jokeText) => {
   }
 }
 
+export const editJoke = async (joke) => {
+    const putOptions = {
+        method: "PUT",
+        headers: { 
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+            ...joke,
+            told: !joke.told
+        })
+    }
+    await fetch(`http://localhost:8088/jokes/${joke.id}`, putOptions)
+}
+
 export const getAllJokes = () => {
     return fetch(`http://localhost:8088/jokes`).then(res => res.json())
 }

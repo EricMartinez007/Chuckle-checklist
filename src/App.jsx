@@ -1,6 +1,6 @@
 import "./App.css"
 import { useState, useEffect } from "react"
-import { getAllJokes, saveJoke } from "./services/jokeService"
+import { getAllJokes, saveJoke, editJoke } from "./services/jokeService"
 
 
 export const App = () => {
@@ -59,6 +59,17 @@ export const App = () => {
                 {untoldJokes.map(joke => (
                   <li className="joke-list-item" key={joke.id}>
                     <p className="joke-list-item-text">{joke.text}</p>
+                    <div>
+                      <button
+                        className="joke-list-action-toggle"
+                        onClick={async () => {
+                          await editJoke(joke)
+                          getJokes()
+                        }}
+                      >
+                        Told
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -69,11 +80,21 @@ export const App = () => {
                 {toldJokes.map(joke => (
                   <li className="joke-list-item" key={joke.id}>
                     <p className="joke-list-item-text">{joke.text}</p>
+                    <div>
+                      <button
+                        className="joke-list-action-toggle"
+                        onClick={async () => {
+                          await editJoke(joke)
+                          getJokes()
+                        }}
+                      >
+                        Untold
+                      </button>
+                    </div>
                   </li>
                 ))}
               </ul>
         </div>
-        
       </div>
       
     </div>
