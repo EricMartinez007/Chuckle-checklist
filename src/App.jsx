@@ -1,6 +1,6 @@
 import "./App.css"
 import { useState, useEffect } from "react"
-import { getAllJokes, saveJoke, editJoke } from "./services/jokeService"
+import { getAllJokes, saveJoke, editJoke, deleteJoke } from "./services/jokeService"
 
 
 export const App = () => {
@@ -60,6 +60,17 @@ export const App = () => {
                   <li className="joke-list-item" key={joke.id}>
                     <p className="joke-list-item-text">{joke.text}</p>
                     <div>
+                      <button 
+                        className="joke-list-action-delete"
+                        onClick={async () => {
+                          await deleteJoke(joke.id)
+                          getJokes()
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div>
                       <button
                         className="joke-list-action-toggle"
                         onClick={async () => {
@@ -67,7 +78,7 @@ export const App = () => {
                           getJokes()
                         }}
                       >
-                        Told
+                        Add to Told
                       </button>
                     </div>
                   </li>
@@ -81,6 +92,17 @@ export const App = () => {
                   <li className="joke-list-item" key={joke.id}>
                     <p className="joke-list-item-text">{joke.text}</p>
                     <div>
+                      <button 
+                        className="joke-list-action-delete"
+                        onClick={async () => {
+                          await deleteJoke(joke.id)
+                          getJokes()
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                    <div>
                       <button
                         className="joke-list-action-toggle"
                         onClick={async () => {
@@ -88,7 +110,7 @@ export const App = () => {
                           getJokes()
                         }}
                       >
-                        Untold
+                        Add to Untold
                       </button>
                     </div>
                   </li>

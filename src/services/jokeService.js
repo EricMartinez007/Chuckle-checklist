@@ -30,6 +30,12 @@ export const editJoke = async (joke) => {
     await fetch(`http://localhost:8088/jokes/${joke.id}`, putOptions)
 }
 
+export const deleteJoke = async (jokeId) => {
+    await fetch(`http://localhost:8088/jokes/${jokeId}`, {
+        method : "DELETE"
+    })
+}
+
 export const getAllJokes = () => {
     return fetch(`http://localhost:8088/jokes`).then(res => res.json())
 }
